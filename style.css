@@ -1,0 +1,159 @@
+/* css file */
+
+/*  */
+
+
+/* ------------------------------------------------------------------------- */
+/* -------------------- Configuration : Menu vertical  --------------------- */
+/* ------------------------------------------------------------------------- */
+.menu-vertical {
+    background: #DF9F9F; /* couleur du fond du menu */
+    color: black;
+    border: none;  /* couleur du bord    1px solid #D77878*/
+    padding: 10px;
+    font-size: 1.5em;   /* taille du texte du menu */
+    width: auto;
+    white-space: nowrap;
+}
+
+.menu-vertical a {
+    background: #DF9F9F; /* couleur du fond du menu */
+    color: white;
+    padding: 2px;
+    text-decoration: none;
+    font-size: 1.em;   /* taille du texte du menu */
+    margin-left: 0.5em;
+    width: auto;
+    white-space: nowrap;
+}
+
+a:hover {
+	border-bottom: 1px gray dotted;
+}
+
+#menu-vertical a.current:link, #menu-vertical a.current:visited {
+	color: #D77878;
+	border-bottom: 1px gray solid;
+}
+#menu-vertical a:link, #menu-vertical a:visited, #menu-vertical a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.menu-vertical a:hover {
+  background-color: #77878;
+  text-decoration: none;
+}
+
+.menu-vertical a.active {
+  background-color: #77878;
+  color: white;
+}
+
+div.menu-category {
+	border-bottom: 1px solid #77878;
+	margin-top: 0.8em;
+	padding-top: 0.2em;
+	padding-bottom: 0.1em;
+	font-weight: bold;
+}
+
+div.menu-item {
+	padding-left: 16px;
+	text-indent: -16px;
+}
+/* ------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------- */
+
+
+
+/* ------------------------------------------------------------------------- */
+/* -------------------- Configuration : Corp global page  ------------------ */
+/* ------------------------------------------------------------------------- */
+.global {
+    background-color: white;
+    display: flex;
+  }
+
+
+
+/* ------------------------------------------------------------------------- */
+/* -------------------- Configuration : Texte a droite    ------------------ */
+/* ------------------------------------------------------------------------- */
+.textedroite {
+   padding-left : 1em;
+  }
+
+
+/* ------------------------------------------------------------------------- */
+/* -------------------- Configuration : Titres et ss-titres  --------------- */
+/* ------------------------------------------------------------------------- */
+  div#toptitle {
+	padding-bottom: 0.2em;
+	margin-bottom: 1.5em;
+    border-bottom: 3px double gray;
+    color: #DF9F9F;
+}
+
+h1, h2, h3 {
+	color: #D77878;
+	margin-top: 0.7em;
+	margin-bottom: 0.3em;
+	padding-bottom: 0.2em;
+	line-height: 1.0;
+	padding-top: 0.5em;
+	border-bottom: 1px solid #aaaaaa;
+}
+
+h1 {
+	font-size: 165%;
+}
+
+h2 {
+	padding-top: 0.8em;
+	font-size: 125%;
+}
+
+h2 + h3 {
+    padding-top: 0.2m;
+}
+
+h3 {
+	font-size: 110%;
+	border-bottom: none;
+}
+
+/* Reduce space if we begin the page with a title. */
+div#toptitle + h2, div#toptitle + h3 {
+	margin-top: +2.2em;
+}
+
+#fwtitle {
+	margin: 2px;
+}
+
+#fwtitle #toptitle {
+	padding-left: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+div#toptitle h1, #menu-vertical div#toptitle h1 {
+	margin-bottom: 0.0em;
+	padding-bottom: 0.1em;
+	padding-top: 0;
+	margin-top: 0.5em;
+	border-bottom: none;
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* -------------------- Configuration : corp de texte  --------------------- */
+/* ------------------------------------------------------------------------- */ 
+body {
+	background: white; 			/* couleur du fond de page */
+	font-family: Georgia, serif;  /* police du texte */
+	font-size: 1.25em; 			  /* taille du texte */
+	padding-bottom: 50px;		  /* PAS ENCORE COMPRIS */
+	margin: 1em; 				  /* marge contour page/tableu */
+}
+
