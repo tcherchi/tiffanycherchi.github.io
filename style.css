@@ -20,7 +20,6 @@
     background: #DF9F9F; /* couleur du fond du menu */
     color: white;
     padding: 2px;
-    padding-top: 3px;
     text-decoration: none;
     font-size: 1.em;   /* taille du texte du menu */
     margin-left: 0.5em;
@@ -62,6 +61,7 @@ div.menu-category {
 div.menu-item {
 	padding-left: 16px;
 	text-indent: -16px;
+	margin: 5px;
 }
 /* ------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------- */
