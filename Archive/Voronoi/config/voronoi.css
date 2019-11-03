@@ -1,0 +1,32 @@
+html, body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+}
+
+#menu {
+	position:absolute;
+	width: 100%;
+	height: 30px;
+	background-color: #ddd;
+}
+
+#foot-menu {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	background-color: #ddd;
+}
+
+.c {
+	padding-top: 5px;
+	text-align: center;
+	float: left;
+	width: 33%;
+	height: 30px;
+}
