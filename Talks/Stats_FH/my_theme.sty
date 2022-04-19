@@ -1,0 +1,208 @@
+%\ProvidesPackage{beamerleanprogress}[2011/04/11 Beamer theme.]
+
+\RequirePackage{xifthen, tikz}
+
+\newlength\lpg@logoht
+\newlength\lpg@logomg
+
+\newlength\lpg@lineoff
+\newlength\lpg@lineht
+\newlength\lpg@linewd
+\newlength\lpg@linepos
+
+\newlength\lpg@rulethickness
+
+\newcount\lpg@framecnt
+\newcount\lpg@frametot
+
+\usebeamerfont{normal text}
+\setbox0=\hbox{\strut}
+\newlength\strutht \strutht\ht0
+\newlength\strutdp \strutdp\dp0
+
+\def\num(#1){\numexpr#1\relax}
+\def\dim(#1){\dimexpr#1\relax}
+
+
+%<< ~~[· frametitle   ·]~~ >>
+\setbeamertemplate{frametitle}{%
+  \vskip-1ex
+  \begin{beamercolorbox}
+    [wd=\lpg@linewd, ht=\strutht, dp=\strutdp] {frametitle}
+    \usebeamerfont{frametitle}\strut\insertframetitle
+  \end{beamercolorbox}
+  \ifx\insertframesubtitle\@empty
+  \else
+    \vskip-.8ex
+    \begin{beamercolorbox}
+      [wd=\lpg@linewd, ht=\strutht, dp=\strutdp] {framesubtitle}
+      \usebeamerfont{framesubtitle}\strut\insertframesubtitle
+    \end{beamercolorbox}
+  \fi}
+%>>
+
+
+
+%<< ~~[· headline     ·]~~ >>
+\setbeamertemplate{headline}{%
+  \lpg@framecnt=\num(\insertframenumber-2)
+  \lpg@frametot=\num(\inserttotalframenumber-2)
+  \lpg@linepos=\dim(\lpg@linewd*\lpg@framecnt/\lpg@frametot)
+%  \begin{beamercolorbox}{section in head/foot}
+%       \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+%     \end{beamercolorbox}%
+     
+  \begin{beamercolorbox}
+   [wd=\textwidth, ht=\strutht, dp=\strutdp,
+     leftskip=\lpg@lineoff, rightskip=\lpg@lineoff] {headline}
+    \ifnum\insertframenumber=1
+    \else
+      \insertsectionnavigationhorizontal{ \lpg@linewd}
+        {\hskip-.15cm}{\hskip-.15cm}{\vskip-.15cm}\par% remove space inserted by beamer       
+      \begin{tikzpicture}
+        \usebeamercolor{lower separation line head}%
+        \shade [left color=bg, right color=fg, middle color=bg]
+          (0,0) rectangle (\lpg@linepos,\lpg@lineht);
+        \shade [left color=fg, right color=bg, middle color=bg]
+          (\lpg@linepos,0) rectangle (\lpg@linewd,\lpg@lineht);
+      \end{tikzpicture}   
+    \fi
+  \end{beamercolorbox}}
+%>>
+
+
+%<< ~~[· footline     ·]~~ >>
+\setbeamertemplate{footline}{%
+  \ifnum\insertframenumber=1
+  \else
+    \begin{beamercolorbox}
+      [ht=\lpg@lineht, colsep*=-\lpg@lineoff]
+      {upper separation line foot}
+    \end{beamercolorbox}  
+    
+  \leavevmode%
+     \hfil\hbox{%
+     \hskip.25ex
+    
+    \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
+       \usebeamerfont{title in head/foot}\insertshortauthor
+    \end{beamercolorbox}%
+
+    \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
+        \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+    \end{beamercolorbox}%
+    
+     \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex, center]{title in head/foot}
+        \insertframenumber{} / \inserttotalframenumber
+     \end{beamercolorbox}}
+  \fi}
+%>>
+
+
+%<< ~~[· blocks       ·]~~ >>
+\newcommand\defblock[1][]{%
+  \edef\doit{%
+    \noexpand\dodefblock
+    {block \ifx#1\@empty\else#1\space\fi begin}
+    {block \ifx#1\@empty\else#1\space\fi end}
+    {block title\ifx#1\@empty\else\space#1\fi}
+    {block body\ifx#1\@empty\else\space#1\fi}}
+  \doit}
+
+\def\dodefblock#1#2#3#4{%
+  \setbeamertemplate{#1}{%
+    \setbox\beamer@tempbox=
+    \hbox to 0.95\textwidth\bgroup
+    \vbox\bgroup\raggedright
+    \begin{minipage}{0.95\textwidth}
+      \ifx\insertblocktitle\@empty\else
+        {\usebeamerfont{#3}\usebeamercolor[fg]{#3}\insertblocktitle}
+        \vskip-2ex
+        \begin{tikzpicture}
+          \usebeamercolor{#3}
+          \path [draw=fg!50!bg, line width=\lpg@rulethickness]
+            (0 ,0) -- (\textwidth,0);
+        \end{tikzpicture}\par\fi
+      \usebeamerfont{#4}\usebeamercolor[fg]{#4}}
+  \setbeamertemplate{#2}{%
+    \end{minipage}\egroup\egroup% close \vbox then \hbox
+    \usebeamercolor{#3}
+    \begin{center}
+      \begin{tikzpicture}
+        \node [draw=fg!50!bg, fill=bg, rounded corners=2pt,
+               line width=\lpg@rulethickness] {\box\beamer@tempbox};
+      \end{tikzpicture}
+    \end{center}}}
+%>>
+
+\useinnertheme{default}
+
+\defblock
+\defblock[example]
+\defblock[alerted]
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{section in head/foot shaded}[default][15]
+\setbeamertemplate{subsection in head/foot shaded}[default][75]
+
+%<< ~~[· macros       ·]~~ >>
+\let\lpg@logo\@empty
+\def\lpglogo#1{%
+  \def\lpg@logo{#1}
+  \pgfdeclareimage[height=\lpg@logoht]{logo}{#1}}
+\def\lpglogoheight{\setlength\lpg@logoht}
+\def\lpglogomargin{\setlength\lpg@logomg}
+
+\def\lpgrulethickness{\setlength\lpg@rulethickness}
+
+\def\lpglineoffset{\setlength\lpg@lineoff}
+\def\lpglineheight{\setlength\lpg@lineht}
+\def\lpglinewidth{\setlength\lpg@linewd}
+
+\renewcommand{\emph}[1]{\textcolor{structure.fg}{\em #1}}
+%>>
+
+
+%<< ~~[· fonts        ·]~~ >>
+\setbeamerfont{structure}{series=\bfseries}
+\setbeamerfont{author}{series=\bfseries,size=\normalsize}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{normal text}{size=\small}% not used, so it is useless
+\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{framesubtitle}{parent=frametitle, size=\small, shape=\itshape, series=\mdseries}
+\setbeamerfont{title in head/foot}{shape=\slshape,size=\tiny,series=\mdseries}
+\setbeamerfont{author in head/foot}{size=\Tiny}
+\setbeamerfont{section in head/foot}{size=\Tiny,series=\bfseries}
+\setbeamerfont{subsection in head/foot}{size=\Tiny,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize}
+
+\setbeamerfont{bibliography entry author}{series=\bfseries,size=\footnotesize}
+\setbeamerfont{bibliography entry title}{series=\mdseries}
+%>>
+
+
+%<< ~~[· colors ·]~~ >>
+\definecolor{bibstruct}{rgb}{.95,.95,.85}
+
+\setbeamercolor{structure}{fg=SteelBlue!90!gray}
+\setbeamercolor{normal text}{fg=gray!40!black, bg=gray!5}
+
+\setbeamercolor{subsection in toc}{fg=SteelBlue}
+\setbeamercolor{section in head/foot}{fg=SteelBlue}
+\setbeamercolor{subsection in head/foot}{parent=section in head/foot}
+\setbeamercolor{item projected}{bg=structure}
+
+\setbeamercolor{author}{fg=IndianRed1}
+\setbeamercolor{title}{fg=SteelBlue}
+\setbeamercolor{author in head/foot}{fg=SteelBlue}
+
+\setbeamercolor{lower separation line head}{parent=structure}
+\setbeamercolor{upper separation line foot}{use=structure, bg=structure.fg}
+%>>
+
+
+\lpgrulethickness{.6pt}
+\lpglineheight\lpg@rulethickness
+
+\lpglineoffset{.5em}
+\lpglinewidth{\dim(\paperwidth-2\lpg@lineoff)}
